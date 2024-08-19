@@ -20,16 +20,13 @@ export function Settings() {
       : "/icons/default-user.svg"
   );
 
-  const [memberUpdateInput, setMemberUpdateInput] = useState<MemberUpdateInput>(
-    {
-      memberNick: authMember?.memberNick,
-      memberPhone: authMember?.memberPhone,
-      memberDesc: authMember?.memberDesc,
-      memberAdress: authMember?.memberAdress,
-      memberImage: authMember?.memberImage,
-      memberPassword: authMember?.memberPassword,
-    }
-  );
+  let [memberUpdateInput, setMemberUpdateInput] = useState<MemberUpdateInput>({
+    memberNick: authMember?.memberNick,
+    memberPhone: authMember?.memberPhone,
+    memberDesc: authMember?.memberDesc,
+    memberAdress: authMember?.memberAdress,
+    memberImage: authMember?.memberImage,
+  });
 
   // HANDLERS
 
@@ -59,17 +56,34 @@ export function Settings() {
     setMemberUpdateInput({ ...memberUpdateInput });
   };
 
+  const memberConfirmPasswordHandler = (e: T) => {
+    memberUpdateInput.memberConfirmPassword = e.target.value;
+    setMemberUpdateInput({ ...memberUpdateInput });
+  };
+
   const submitButton = async () => {
     try {
       if (!authMember) throw new Error(Messages.error2);
 
       if (
+        memberUpdateInput.memberPassword !==
+        memberUpdateInput.memberConfirmPassword
+      )
+        throw new Error(Messages.error6);
+
+      if (
         memberUpdateInput.memberNick === "" ||
-        memberUpdateInput.memberPhone === "" ||
-        memberUpdateInput.memberAdress === "" ||
-        memberUpdateInput.memberDesc === ""
+        memberUpdateInput.memberPhone === ""
+      ) {
+        throw new Error(Messages.error3);
+      }
+
+      if (
+        memberUpdateInput.memberNick === "" ||
+        memberUpdateInput.memberPhone === ""
       )
         throw new Error(Messages.error3);
+      console.log("memberupdateinput: ", memberUpdateInput);
 
       const member = new MemberService();
       const result = await member.updateMember(memberUpdateInput);
@@ -140,7 +154,6 @@ export function Settings() {
             className={"spec-input  mb-address"}
             type="text"
             placeholder={authMember?.memberAdress ?? "no address"}
-            value={memberUpdateInput.memberAdress}
             name="memberAdress"
             onChange={memberAdressHandler}
           />
@@ -150,10 +163,9 @@ export function Settings() {
         <div className={"short-input"}>
           <label className={"spec-label"}>Password</label>
           <input
-            className={"spec-input mb-phone"}
+            className={"spec-input mb-password"}
             type="text"
             placeholder={"Password"}
-            value={memberUpdateInput.memberPassword}
             name="memberPassword"
             onChange={memberPasswordHandler}
           />
@@ -161,12 +173,12 @@ export function Settings() {
         <div className={"short-input"}>
           <label className={"spec-label"}>Repeat Password</label>
           <input
-            className={"spec-input  mb-address"}
+            className={"spec-input  mb-password"}
             type="text"
             placeholder={"Confirm Password"}
-            value={memberUpdateInput.memberPassword}
+            value={memberUpdateInput.memberConfirmPassword}
             name="memberPassword"
-            onChange={memberPasswordHandler}
+            onChange={memberConfirmPasswordHandler}
           />
         </div>
       </Box>

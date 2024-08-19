@@ -6,4 +6,5 @@ export const Messages = {
   error3: "Please fulfill all inputs!",
   error4: "Message is empty!",
   error5: "Only images with jpeg,jpg and png format allowed!",
+  error6: "Passwords differ please input the same password!",
 };
