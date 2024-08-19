@@ -14,7 +14,7 @@ import { useSelector } from "react-redux";
 import { createSelector } from "reselect";
 import { retrieveTopUsers } from "./selector";
 import { serverApi } from "../../../lib/config";
-import { Member } from "../../../lib/types/member";
+import { Product } from "../../../lib/types/product";
 
 const topUsersRetriever = createSelector(retrieveTopUsers, (activeUsers) => ({
   activeUsers,
@@ -30,10 +30,10 @@ export default function ActiveUsers() {
           <Stack className="cards-frame">
             <CssVarsProvider>
               {activeUsers.length !== 0 ? (
-                activeUsers.map((member: Member) => {
-                  const imagePath = `${serverApi}/${member.memberImage}`;
+                activeUsers.map((product: Product) => {
+                  const imagePath = `${serverApi}/${product.productImages}`;
                   return (
-                    <Card className="card" key={member._id}>
+                    <Card className="card" key={product._id}>
                       <CardOverflow>
                         <AspectRatio ratio={1}>
                           <img src={imagePath} alt="image here" />
@@ -42,14 +42,14 @@ export default function ActiveUsers() {
 
                       <CardOverflow className="member-nickname">
                         <Box>
-                          <Typography>{member.memberNick}</Typography>
+                          <Typography>{product.productName}</Typography>
                         </Box>
                       </CardOverflow>
                     </Card>
                   );
                 })
               ) : (
-                <Box className="no-data">No Active Users!</Box>
+                <Box className="no-data">No products on sale now!</Box>
               )}
             </CssVarsProvider>
           </Stack>

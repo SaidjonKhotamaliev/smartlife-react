@@ -27,6 +27,7 @@ export function Settings() {
       memberDesc: authMember?.memberDesc,
       memberAdress: authMember?.memberAdress,
       memberImage: authMember?.memberImage,
+      memberPassword: authMember?.memberPassword,
     }
   );
 
@@ -50,6 +51,11 @@ export function Settings() {
   };
   const memberImageHandler = (e: T) => {
     memberUpdateInput.memberImage = e.target.value;
+    setMemberUpdateInput({ ...memberUpdateInput });
+  };
+
+  const memberPasswordHandler = (e: T) => {
+    memberUpdateInput.memberPassword = e.target.value;
     setMemberUpdateInput({ ...memberUpdateInput });
   };
 
@@ -137,6 +143,30 @@ export function Settings() {
             value={memberUpdateInput.memberAdress}
             name="memberAdress"
             onChange={memberAdressHandler}
+          />
+        </div>
+      </Box>
+      <Box className={"input-frame"}>
+        <div className={"short-input"}>
+          <label className={"spec-label"}>Password</label>
+          <input
+            className={"spec-input mb-phone"}
+            type="text"
+            placeholder={"Password"}
+            value={memberUpdateInput.memberPassword}
+            name="memberPassword"
+            onChange={memberPasswordHandler}
+          />
+        </div>
+        <div className={"short-input"}>
+          <label className={"spec-label"}>Repeat Password</label>
+          <input
+            className={"spec-input  mb-address"}
+            type="text"
+            placeholder={"Confirm Password"}
+            value={memberUpdateInput.memberPassword}
+            name="memberPassword"
+            onChange={memberPasswordHandler}
           />
         </div>
       </Box>

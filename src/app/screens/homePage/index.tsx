@@ -7,7 +7,7 @@ import PopularDishes from "./PopularDishes";
 import Statistics from "./Statistics";
 import { useDispatch, useSelector } from "react-redux";
 import { Dispatch } from "@reduxjs/toolkit";
-import { setNewDishes, setPopularDishes, setTopUsers } from "./slice";
+import { setNewDishes, setPopularDishes, setHotProducts } from "./slice";
 import { Product } from "../../../lib/types/product";
 import ProductService from "../../services/ProductService";
 import { ProductCollection } from "../../../lib/enums/product.enum";
@@ -19,11 +19,11 @@ import { Member } from "../../../lib/types/member";
 const actionDispatch = (dispatch: Dispatch) => ({
   setPopularDishes: (data: Product[]) => dispatch(setPopularDishes(data)),
   setNewDishes: (data: Product[]) => dispatch(setNewDishes(data)),
-  setTopUsers: (data: Member[]) => dispatch(setTopUsers(data)),
+  setHotProducts: (data: Product[]) => dispatch(setHotProducts(data)),
 });
 
 export default function HomePage() {
-  const { setPopularDishes, setNewDishes, setTopUsers } = actionDispatch(
+  const { setPopularDishes, setNewDishes, setHotProducts } = actionDispatch(
     useDispatch()
   );
 
@@ -36,7 +36,6 @@ export default function HomePage() {
         page: 1,
         limit: 4,
         order: "productOrders",
-        productCollection: ProductCollection.SMARTPHONE,
       })
       .then((data) => {
         console.log("data: ", data);
@@ -60,11 +59,15 @@ export default function HomePage() {
         console.log(err);
       });
 
-    member
-      .getTopUsers()
+    product
+      .getProducts({
+        page: 1,
+        limit: 4,
+        order: "productOnSale",
+      })
       .then((data) => {
         console.log("data: ", data);
-        setTopUsers(data);
+        setHotProducts(data);
       })
       .catch((err) => {
         console.log(err);

@@ -193,15 +193,27 @@ export default function Products(props: ProductsProps) {
               </Button>
               <Button
                 color={
-                  productSearch.order === "productViews"
+                  productSearch.order === "productOrders"
                     ? "primary"
                     : "secondary"
                 }
                 className={"order"}
                 variant={"contained"}
-                onClick={() => searchOrderHandler("productViews")}
+                onClick={() => searchOrderHandler("productOrders")}
               >
-                Views
+                Orders
+              </Button>
+              <Button
+                color={
+                  productSearch.order === "productOnSale"
+                    ? "primary"
+                    : "secondary"
+                }
+                className={"order"}
+                variant={"contained"}
+                onClick={() => searchOrderHandler("productOnSale")}
+              >
+                Hot
               </Button>
             </Stack>
           </Stack>
