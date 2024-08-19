@@ -161,7 +161,7 @@ export function Settings() {
       </Box>
       <Box className={"input-frame"}>
         <div className={"short-input"}>
-          <label className={"spec-label"}>Password</label>
+          <label className={"spec-label"}>New Password</label>
           <input
             className={"spec-input mb-password"}
             type="text"
