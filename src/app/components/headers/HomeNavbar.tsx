@@ -47,7 +47,7 @@ export default function HomeNavbar(props: HomeNavbarProps) {
         <Stack className="menu">
           <Box>
             <NavLink to={"/"}>
-              <img className="brand-logo" src="/icons/burak.svg" />
+              <img className="brand-logo" src="/icons/file.png" />
             </NavLink>
           </Box>
           <Stack className="links">

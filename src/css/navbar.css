@@ -3,7 +3,7 @@
   width: 100%;
   height: 773px;
   display: flex;
-  background: url("/public/img/banner.webp");
+  background: url("/public/img/background.png");
   background-size: cover;
 }
 
@@ -21,7 +21,7 @@
 }
 .home-navbar .navbar-container .menu .brand-logo {
   width: 125px;
-  height: 30px;
+  height: 100px;
 }
 
 .home-navbar .navbar-container .menu .links {
@@ -46,7 +46,8 @@
 }
 
 .home-navbar .hover-line a {
-  color: #f8f8ff;
+  font-size: 24px;
+  color: #beaf5a;
   z-index: 100;
 }
 
@@ -71,7 +72,6 @@
 }
 
 .home-navbar .navbar-container .header-frame {
-  margin-top: 142px;
   height: 462px;
   display: flex;
   flex-direction: row;
@@ -79,6 +79,7 @@
 }
 
 .home-navbar .navbar-container .header-frame .detail {
+  margin-top: 142px;
   width: 510px;
   display: flex;
   flex-direction: column;
@@ -93,7 +94,7 @@
   font-weight: 500;
   line-height: normal;
   letter-spacing: -0.75px;
-  color: #f8f8ff;
+  color: #beaf5a;
 }
 .home-navbar .navbar-container .header-frame .detail .wel-txt {
   width: 510px;
@@ -104,7 +105,7 @@
   font-weight: 400;
   line-height: normal;
   letter-spacing: -0.54px;
-  color: #d7b686;
+  color: #beaf5a;
 }
 
 .home-navbar .navbar-container .header-frame .detail .service-txt {
@@ -117,7 +118,7 @@
   font-weight: 400;
   line-height: normal;
   letter-spacing: -0.3px;
-  color: #d5d5d5;
+  color: #444d51;
 }
 
 .home-navbar .navbar-container .header-frame .detail .signup {
@@ -139,14 +140,14 @@
 }
 
 .home-navbar .navbar-container .header-frame .logo-frame {
-  margin-top: 43px;
+  margin-left: 100px;
   width: 690px;
   height: 419px;
 }
 .home-navbar .navbar-container .header-frame .logo-frame .logo-img {
-  width: 100%;
-  height: 100%;
-  background: url("/public/img/logo.webp");
+  width: 180%;
+  height: 180%;
+  background: url("/public/icons/file.png");
   background-size: contain;
   background-repeat: no-repeat;
   filter: invert(25%);
@@ -158,7 +159,7 @@
   width: 100%;
   height: 400px;
   display: flex;
-  background: url("/public/img/banner.webp");
+  background: url("/public/img/background2.png");
   background-size: cover;
 }
 
@@ -169,13 +170,14 @@
 .other-navbar .navbar-container .menu {
   height: 50px;
   display: flex;
+  /* gap: 40px; */
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
 }
 .other-navbar .navbar-container .menu .brand-logo {
   width: 125px;
-  height: 30px;
+  height: 100px;
 }
 
 .other-navbar .navbar-container .menu .links {
@@ -200,7 +202,8 @@
 }
 
 .other-navbar .hover-line a {
-  color: #f8f8ff;
+  font-size: 24px;
+  color: #beaf5a;
   z-index: 100;
 }
 

@@ -161,11 +161,11 @@ export function Settings() {
       </Box>
       <Box className={"input-frame"}>
         <div className={"short-input"}>
-          <label className={"spec-label"}>New Password</label>
+          <label className={"spec-label"}>Password</label>
           <input
             className={"spec-input mb-password"}
             type="text"
-            placeholder={"Password"}
+            placeholder={"New Password"}
             name="memberPassword"
             onChange={memberPasswordHandler}
           />

@@ -15,7 +15,6 @@ import {
 } from "../../../lib/sweetAlert";
 import { useGlobals } from "../../hooks/useGlobals";
 import OrderService from "../../services/OrderSerivce";
-
 interface BasketProps {
   cartItems: CartItem[];
   onAdd: (item: CartItem) => void;
@@ -74,7 +73,7 @@ export default function Basket(props: BasketProps) {
         onClick={handleClick}
       >
         <Badge badgeContent={cartItems.length} color="secondary">
-          <img src={"/icons/shopping-cart.svg"} />
+          <img src={"/icons/cart2.png"} width={"24px"} />
         </Badge>
       </IconButton>
       <Menu
