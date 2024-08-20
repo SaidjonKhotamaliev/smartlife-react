@@ -1,7 +1,15 @@
 import Button from "@mui/material/Button";
-import { Box, ListItemIcon, Menu, MenuItem } from "@mui/material";
+import {
+  Box,
+  FormControl,
+  ListItemIcon,
+  Menu,
+  MenuItem,
+  OutlinedInput,
+  TextField,
+} from "@mui/material";
 import { Container, Stack } from "@mui/system";
-import { NavLink } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
 import Basket from "./Basket";
 import { useEffect, useState } from "react";
 import { CartItem } from "../../../lib/types/search";
@@ -89,6 +97,21 @@ export default function HomeNavbar(props: HomeNavbarProps) {
               onDelete={onDelete}
               onDeleteAll={onDeleteAll}
             />
+            {authMember ? (
+              <Box>
+                <img
+                  className="user-avatar"
+                  src={
+                    authMember?.memberImage
+                      ? `${serverApi}/${authMember?.memberImage}`
+                      : "/icons/default-user.svg"
+                  }
+                  aria-haspopup={"true"}
+                  onClick={handleLogoutClick}
+                />
+              </Box>
+            ) : null}
+
             <Menu
               anchorEl={anchorEl}
               id="account-menu"
@@ -158,18 +181,17 @@ export default function HomeNavbar(props: HomeNavbarProps) {
                     Login
                   </Button>
                 </Box>
-              ) : (
-                <img
-                  className="user-avatar"
-                  src={
-                    authMember?.memberImage
-                      ? `${serverApi}/${authMember?.memberImage}`
-                      : "/icons/default-user.svg"
-                  }
-                  aria-haspopup={"true"}
-                  onClick={handleLogoutClick}
-                />
-              )}
+              ) : // <img
+              //   className="user-avatar"
+              //   src={
+              //     authMember?.memberImage
+              //       ? `${serverApi}/${authMember?.memberImage}`
+              //       : "/icons/default-user.svg"
+              //   }
+              //   aria-haspopup={"true"}
+              //   onClick={handleLogoutClick}
+              // />
+              null}
 
               <Box className="signup">
                 {!authMember ? (

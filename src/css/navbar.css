@@ -13,7 +13,7 @@
 }
 
 .home-navbar .navbar-container .menu {
-  height: 50px;
+  height: 40px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -22,6 +22,7 @@
 .home-navbar .navbar-container .menu .brand-logo {
   width: 125px;
   height: 100px;
+  align-self: center;
 }
 
 .home-navbar .navbar-container .menu .links {
