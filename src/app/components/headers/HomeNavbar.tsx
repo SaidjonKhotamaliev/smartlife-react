@@ -89,29 +89,6 @@ export default function HomeNavbar(props: HomeNavbarProps) {
               onDelete={onDelete}
               onDeleteAll={onDeleteAll}
             />
-            {!authMember ? (
-              <Box>
-                <Button
-                  onClick={() => setLoginOpen(true)}
-                  className="login-button"
-                  variant="contained"
-                >
-                  Login
-                </Button>
-              </Box>
-            ) : (
-              <img
-                className="user-avatar"
-                src={
-                  authMember?.memberImage
-                    ? `${serverApi}/${authMember?.memberImage}`
-                    : "/icons/default-user.svg"
-                }
-                aria-haspopup={"true"}
-                onClick={handleLogoutClick}
-              />
-            )}
-
             <Menu
               anchorEl={anchorEl}
               id="account-menu"
@@ -158,21 +135,54 @@ export default function HomeNavbar(props: HomeNavbarProps) {
         </Stack>
         <Stack className="header-frame">
           <Stack className="detail">
-            <Box className="head-main-txt">World's Most Delicious Cousine</Box>
-            <Box className="wel-txt">The Choice, not just a choice</Box>
-            <Box className="service-txt">24 hours service</Box>
-            <Box className="signup">
-              {" "}
-              {!authMember ? (
-                <Button
-                  variant="contained"
-                  className="signup-btn"
-                  onClick={() => setSignupOpen(true)}
-                >
-                  SIGN UP
-                </Button>
-              ) : null}
+            <Box className="head-main-txt">Empowering Your Smart Life!</Box>
+            <Box className="wel-txt">
+              At Smartlife, we bring you the latest and most innovative gadgets,
+              carefully selected to enhance your everyday life. From
+              cutting-edge smartphones to must-have accessories, discover a
+              world where technology meets convenience.
             </Box>
+            <Stack
+              marginTop={"30px"}
+              gap={"20px"}
+              display={"flex"}
+              flexDirection={"row"}
+            >
+              {!authMember ? (
+                <Box>
+                  <Button
+                    onClick={() => setLoginOpen(true)}
+                    className="login-button"
+                    variant="contained"
+                  >
+                    Login
+                  </Button>
+                </Box>
+              ) : (
+                <img
+                  className="user-avatar"
+                  src={
+                    authMember?.memberImage
+                      ? `${serverApi}/${authMember?.memberImage}`
+                      : "/icons/default-user.svg"
+                  }
+                  aria-haspopup={"true"}
+                  onClick={handleLogoutClick}
+                />
+              )}
+
+              <Box className="signup">
+                {!authMember ? (
+                  <Button
+                    variant="contained"
+                    className="signup-btn"
+                    onClick={() => setSignupOpen(true)}
+                  >
+                    SIGN UP
+                  </Button>
+                ) : null}
+              </Box>
+            </Stack>
           </Stack>
           <Box className="logo-frame">
             <div className="logo-img"></div>

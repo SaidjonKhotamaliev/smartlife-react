@@ -30,6 +30,7 @@ import ProductService from "../../services/ProductService";
 import { ProductCollection } from "../../../lib/enums/product.enum";
 import { useHistory } from "react-router-dom";
 import { CartItem } from "../../../lib/types/search";
+import Advertisement from "../homePage/Advertisement";
 
 const StyledButton = styled(Button)(({ theme }) => ({
   borderRadius: "20px",
