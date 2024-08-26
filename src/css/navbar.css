@@ -183,7 +183,7 @@
 }
 
 .other-navbar .navbar-container .menu .links .login-button {
-  background-color: #bdb159;
+  background-color: #c41c1d;
   color: #f8f8ff;
 }
 .other-navbar .navbar-container .menu .links .user-avatar {
@@ -197,7 +197,7 @@
 
 .other-navbar .hover-line a {
   font-size: 24px;
-  color: #beaf5a;
+  color: #626b74;
   z-index: 100;
 }
 

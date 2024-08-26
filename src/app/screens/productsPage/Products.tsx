@@ -35,6 +35,12 @@ import { AspectRatio, Button, Chip, Link } from "@mui/joy";
 import ArrowOutwardIcon from "@mui/icons-material/ArrowOutward";
 import Typography from "@mui/joy/Typography";
 import SearchIcon from "@mui/icons-material/Search";
+import DevicesOtherIcon from "@mui/icons-material/DevicesOther";
+import SmartphoneIcon from "@mui/icons-material/Smartphone";
+import TabletIcon from "@mui/icons-material/Tablet";
+import LaptopIcon from "@mui/icons-material/Laptop";
+import HeadphonesIcon from "@mui/icons-material/Headphones";
+import WatchIcon from "@mui/icons-material/Watch";
 
 const actionDispatch = (dispatch: Dispatch) => ({
   setProducts: (data: Product[]) => dispatch(setProducts(data)),
@@ -127,7 +133,9 @@ export default function Products(props: ProductsProps) {
                 boxShadow: "0 0 5px rgba(0, 0, 0, 0.2)",
               }}
             >
-              <div style={{ position: "relative", width: "600px" }}>
+              <div
+                style={{ position: "relative", width: "100%", height: "60px" }}
+              >
                 <input
                   type="search"
                   value={searchText}
@@ -137,8 +145,8 @@ export default function Products(props: ProductsProps) {
                   }}
                   style={{
                     width: "100%",
-                    borderRadius: "10px",
-                    height: "50px",
+                    borderRadius: "50px",
+                    height: "60px",
                     paddingLeft: "40px",
                     boxSizing: "border-box",
                   }}
@@ -156,21 +164,15 @@ export default function Products(props: ProductsProps) {
             </Stack>
           </Stack>
 
-          <Stack className="dishes-filter-section">
-            <Stack className="dishes-filter-box">
-              {/* <Button
-                color={
-                  productSearch.order === "createdAt" ? "primary" : "secondary"
-                }
-                className={"order"}
-                variant={"contained"}
-                onClick={() => searchOrderHandler("createdAt")}
-              >
-                New
-              </Button> */}
+          <Stack sx={{ margin: "20px 20px" }}>
+            <Stack>
               <CssVarsProvider>
                 <CardOverflow
-                  sx={{ display: "flex", flexDirection: "row", gap: "20px" }}
+                  sx={{
+                    display: "flex",
+                    flexDirection: "row",
+                    gap: "20px",
+                  }}
                 >
                   <Button
                     variant="solid"
@@ -183,7 +185,7 @@ export default function Products(props: ProductsProps) {
                     onClick={() => searchOrderHandler("productOnSale")}
                     size="lg"
                   >
-                    HOT
+                    SALE
                   </Button>
                   <Button
                     variant="solid"
@@ -227,93 +229,114 @@ export default function Products(props: ProductsProps) {
             </Stack>
           </Stack>
 
-          {/* <Stack className="product-category">
-              <Button
-                color={
-                  productSearch.productCollection ===
-                  ProductCollection.SMARTPHONE
-                    ? "primary"
-                    : "secondary"
-                }
-                className={"order"}
-                variant={"contained"}
-                onClick={() =>
-                  searchCollectionHandler(ProductCollection.SMARTPHONE)
-                }
+          <Stack sx={{ margin: "0px 20px" }}>
+            <CssVarsProvider>
+              <CardOverflow
+                sx={{ display: "flex", flexDirection: "row", gap: "20px" }}
               >
-                Smartphone
-              </Button>
-              <Button
-                color={
-                  productSearch.productCollection === ProductCollection.TABLET
-                    ? "primary"
-                    : "secondary"
-                }
-                className={"order"}
-                variant={"contained"}
-                onClick={() =>
-                  searchCollectionHandler(ProductCollection.TABLET)
-                }
-              >
-                Tablet
-              </Button>
-              <Button
-                color={
-                  productSearch.productCollection === ProductCollection.LAPTOP
-                    ? "primary"
-                    : "secondary"
-                }
-                className={"order"}
-                variant={"contained"}
-                onClick={() =>
-                  searchCollectionHandler(ProductCollection.LAPTOP)
-                }
-              >
-                Laptop
-              </Button>
-              <Button
-                color={
-                  productSearch.productCollection ===
-                  ProductCollection.SMARTWATCH
-                    ? "primary"
-                    : "secondary"
-                }
-                className={"order"}
-                variant={"contained"}
-                onClick={() =>
-                  searchCollectionHandler(ProductCollection.SMARTWATCH)
-                }
-              >
-                Smartwatch
-              </Button>
-              <Button
-                color={
-                  productSearch.productCollection ===
-                  ProductCollection.HEADPHONE
-                    ? "primary"
-                    : "secondary"
-                }
-                className={"order"}
-                variant={"contained"}
-                onClick={() =>
-                  searchCollectionHandler(ProductCollection.HEADPHONE)
-                }
-              >
-                Headphone
-              </Button>
-              <Button
-                color={
-                  productSearch.productCollection === ProductCollection.OTHER
-                    ? "primary"
-                    : "secondary"
-                }
-                className={"order"}
-                variant={"contained"}
-                onClick={() => searchCollectionHandler(ProductCollection.OTHER)}
-              >
-                Other
-              </Button>
-            </Stack> */}
+                <Button
+                  variant="solid"
+                  color={
+                    productSearch.productCollection ===
+                    ProductCollection.SMARTPHONE
+                      ? "danger"
+                      : "neutral"
+                  }
+                  size="lg"
+                  className={"order"}
+                  onClick={() =>
+                    searchCollectionHandler(ProductCollection.SMARTPHONE)
+                  }
+                >
+                  <SmartphoneIcon sx={{ marginRight: "5px" }} />
+                  Smartphone
+                </Button>
+
+                <Button
+                  variant="solid"
+                  color={
+                    productSearch.productCollection === ProductCollection.TABLET
+                      ? "danger"
+                      : "neutral"
+                  }
+                  size="lg"
+                  className={"order"}
+                  onClick={() =>
+                    searchCollectionHandler(ProductCollection.TABLET)
+                  }
+                >
+                  <TabletIcon sx={{ marginRight: "5px" }} /> Tablet
+                </Button>
+
+                <Button
+                  variant="solid"
+                  color={
+                    productSearch.productCollection === ProductCollection.LAPTOP
+                      ? "danger"
+                      : "neutral"
+                  }
+                  size="lg"
+                  className={"order"}
+                  onClick={() =>
+                    searchCollectionHandler(ProductCollection.LAPTOP)
+                  }
+                >
+                  <LaptopIcon sx={{ marginRight: "5px" }} /> Laptop
+                </Button>
+
+                <Button
+                  variant="solid"
+                  color={
+                    productSearch.productCollection ===
+                    ProductCollection.SMARTWATCH
+                      ? "danger"
+                      : "neutral"
+                  }
+                  size="lg"
+                  className={"order"}
+                  onClick={() =>
+                    searchCollectionHandler(ProductCollection.SMARTWATCH)
+                  }
+                >
+                  <WatchIcon sx={{ marginRight: "5px" }} /> Smartwatch
+                </Button>
+
+                <Button
+                  variant="solid"
+                  color={
+                    productSearch.productCollection ===
+                    ProductCollection.HEADPHONE
+                      ? "danger"
+                      : "neutral"
+                  }
+                  size="lg"
+                  className={"order"}
+                  onClick={() =>
+                    searchCollectionHandler(ProductCollection.HEADPHONE)
+                  }
+                >
+                  <HeadphonesIcon sx={{ marginRight: "5px" }} /> Headphone
+                </Button>
+
+                <Button
+                  variant="solid"
+                  color={
+                    productSearch.productCollection === ProductCollection.OTHER
+                      ? "danger"
+                      : "neutral"
+                  }
+                  size="lg"
+                  className={"order"}
+                  onClick={() =>
+                    searchCollectionHandler(ProductCollection.OTHER)
+                  }
+                >
+                  <DevicesOtherIcon sx={{ marginRight: "5px" }} /> Other
+                </Button>
+              </CardOverflow>
+            </CssVarsProvider>
+          </Stack>
+
           <Stack className="list-category-section">
             <Stack className="product-wrapper">
               {products.length !== 0 ? (
