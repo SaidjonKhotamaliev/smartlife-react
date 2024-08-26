@@ -1,16 +1,15 @@
 import React, { ChangeEvent, useEffect, useState } from "react";
 import {
   Box,
-  Button,
+  // Button,
   Container,
   Stack,
-  Typography,
+  // Typography,
   TextField,
   Badge,
   PaginationItem,
   Pagination,
 } from "@mui/material";
-import SearchIcon from "@mui/icons-material/Search";
 import { styled } from "@mui/system";
 import {
   AddBox,
@@ -31,32 +30,11 @@ import { ProductCollection } from "../../../lib/enums/product.enum";
 import { useHistory, useLocation } from "react-router-dom";
 import { CartItem } from "../../../lib/types/search";
 import Advertisement from "../homePage/Advertisement";
-
-const StyledButton = styled(Button)(({ theme }) => ({
-  borderRadius: "20px",
-  backgroundColor: "#343434",
-  color: "#D7B586",
-  padding: "0 20px", // Adjust padding to fit text
-  minWidth: "auto", // Adjust to fit content
-  height: "40px", // Match the height of the Stack
-  "&:hover": {
-    backgroundColor: "#343434", // Darker orange color
-    boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.2)", // Box shadow on hover
-  },
-  display: "flex",
-  alignItems: "center",
-}));
-
-const StyledInput = styled(TextField)(({ theme }) => ({
-  "& .MuiOutlinedInput-root": {
-    borderRadius: "20px",
-    height: "40px",
-    "& fieldset": {
-      borderRadius: "20px",
-      border: "none",
-    },
-  },
-}));
+import { Card, CardContent, CardOverflow, CssVarsProvider } from "@mui/joy";
+import { AspectRatio, Button, Chip, Link } from "@mui/joy";
+import ArrowOutwardIcon from "@mui/icons-material/ArrowOutward";
+import Typography from "@mui/joy/Typography";
+import SearchIcon from "@mui/icons-material/Search";
 
 const actionDispatch = (dispatch: Dispatch) => ({
   setProducts: (data: Product[]) => dispatch(setProducts(data)),
@@ -107,7 +85,7 @@ export default function Products(props: ProductsProps) {
     }
   }, [searchText]);
 
-  // HANDLERS
+  // // HANDLERS
   const searchCollectionHandler = (collection: ProductCollection) => {
     productSearch.page = 1;
     productSearch.productCollection = collection;
@@ -139,39 +117,48 @@ export default function Products(props: ProductsProps) {
       <Container>
         <Stack className="products">
           <Stack className="title">
-            <Typography className="title-text" fontSize={"36px"}>
-              Smartlife shop
-            </Typography>
-            <Box
+            <Stack
               sx={{
                 display: "flex",
                 alignItems: "center",
                 borderRadius: "50px",
                 overflow: "hidden",
+                justifyContent: "center",
                 boxShadow: "0 0 5px rgba(0, 0, 0, 0.2)",
               }}
             >
-              <StyledInput
-                type="search"
-                value={searchText}
-                sx={{ width: "300px" }}
-                onChange={(e) => {
-                  setSearchText(e.target.value);
-                }}
-                onKeyDown={(e) => {
-                  if (e.key === "Enter") searchProductHandler();
-                }}
-              />
-              <StyledButton onClick={searchProductHandler}>
-                SEARCH
-                <SearchIcon sx={{ marginLeft: "5px" }} />
-              </StyledButton>
-            </Box>
+              <div style={{ position: "relative", width: "600px" }}>
+                <input
+                  type="search"
+                  value={searchText}
+                  onChange={(e) => setSearchText(e.target.value)}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter") searchProductHandler();
+                  }}
+                  style={{
+                    width: "100%",
+                    borderRadius: "10px",
+                    height: "50px",
+                    paddingLeft: "40px",
+                    boxSizing: "border-box",
+                  }}
+                />
+                <SearchIcon
+                  style={{
+                    position: "absolute",
+                    left: "10px",
+                    top: "50%",
+                    transform: "translateY(-50%)",
+                    color: "#aaa",
+                  }}
+                />
+              </div>
+            </Stack>
           </Stack>
 
           <Stack className="dishes-filter-section">
             <Stack className="dishes-filter-box">
-              <Button
+              {/* <Button
                 color={
                   productSearch.order === "createdAt" ? "primary" : "secondary"
                 }
@@ -180,48 +167,67 @@ export default function Products(props: ProductsProps) {
                 onClick={() => searchOrderHandler("createdAt")}
               >
                 New
-              </Button>
-              <Button
-                color={
-                  productSearch.order === "productPrice"
-                    ? "primary"
-                    : "secondary"
-                }
-                className={"order"}
-                variant={"contained"}
-                onClick={() => searchOrderHandler("productPrice")}
-              >
-                Price
-              </Button>
-              <Button
-                color={
-                  productSearch.order === "productOrders"
-                    ? "primary"
-                    : "secondary"
-                }
-                className={"order"}
-                variant={"contained"}
-                onClick={() => searchOrderHandler("productOrders")}
-              >
-                Orders
-              </Button>
-              <Button
-                color={
-                  productSearch.order === "productOnSale"
-                    ? "primary"
-                    : "secondary"
-                }
-                className={"order"}
-                variant={"contained"}
-                onClick={() => searchOrderHandler("productOnSale")}
-              >
-                Hot
-              </Button>
+              </Button> */}
+              <CssVarsProvider>
+                <CardOverflow
+                  sx={{ display: "flex", flexDirection: "row", gap: "20px" }}
+                >
+                  <Button
+                    variant="solid"
+                    color={
+                      productSearch.order === "productOnSale"
+                        ? "danger"
+                        : "neutral"
+                    }
+                    className={"order"}
+                    onClick={() => searchOrderHandler("productOnSale")}
+                    size="lg"
+                  >
+                    HOT
+                  </Button>
+                  <Button
+                    variant="solid"
+                    color={
+                      productSearch.order === "productPrice"
+                        ? "danger"
+                        : "neutral"
+                    }
+                    size="lg"
+                    className={"order"}
+                    onClick={() => searchOrderHandler("productPrice")}
+                  >
+                    PRICE
+                  </Button>
+                  <Button
+                    variant="solid"
+                    color={
+                      productSearch.order === "createdAt" ? "danger" : "neutral"
+                    }
+                    size="lg"
+                    className={"order"}
+                    onClick={() => searchOrderHandler("createdAt")}
+                  >
+                    NEW
+                  </Button>
+                  <Button
+                    variant="solid"
+                    color={
+                      productSearch.order === "productOrder"
+                        ? "danger"
+                        : "neutral"
+                    }
+                    size="lg"
+                    className={"order"}
+                    onClick={() => searchOrderHandler("productOrder")}
+                  >
+                    ORDER
+                  </Button>
+                </CardOverflow>
+              </CssVarsProvider>
             </Stack>
           </Stack>
 
-          <Stack className="list-category-section">
-            <Stack className="product-category">
+          {/* <Stack className="product-category">
               <Button
                 color={
                   productSearch.productCollection ===
@@ -307,8 +313,8 @@ export default function Products(props: ProductsProps) {
               >
                 Other
               </Button>
-            </Stack>
-
+            </Stack> */}
+          <Stack className="list-category-section">
             <Stack className="product-wrapper">
               {products.length !== 0 ? (
                 products.map((product: Product) => {
@@ -319,54 +325,108 @@ export default function Products(props: ProductsProps) {
                       key={product._id}
                       className="product-card"
                     >
-                      <Stack
-                        className="product-img"
-                        sx={{ backgroundImage: `url(${imagePath})` }}
-                      >
-                        <div className="product-sale">
-                          ---------------------
-                        </div>
-                        <Button
-                          className="shop-btn"
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            onAdd({
-                              _id: product._id,
-                              quantity: 1,
-                              price: product.productPrice,
-                              name: product.productName,
-                              image: product.productImages[0],
-                            });
+                      <CssVarsProvider key={product._id}>
+                        <Card
+                          sx={{
+                            width: 320,
+                            maxWidth: "100%",
+                            boxShadow: "lg",
                           }}
+                          className="card"
+                          onClick={() => chooseDishHandler(product._id)}
                         >
-                          <img
-                            src="/icons/shopping-cart.svg"
-                            style={{ display: "flex" }}
-                          />
-                        </Button>
-                        <Button className="view-btn" sx={{ right: "36px" }}>
-                          <Badge
-                            badgeContent={product.productViews}
-                            color={"secondary"}
-                          >
-                            <RemoveRedEye
-                              sx={{
-                                color:
-                                  product.productViews === 0 ? "grey" : "white",
-                              }}
-                            ></RemoveRedEye>
-                          </Badge>
-                        </Button>
-                      </Stack>
-                      <Box className={"product-desc"}>
-                        <span className={"product-title"}>
-                          {product.productName}
-                        </span>
-                        <div className={"product-price"}>
-                          <MonetizationOn />
-                          {product.productPrice}
-                        </div>
-                      </Box>
+                          <CardOverflow>
+                            <AspectRatio sx={{ minWidth: 200 }}>
+                              <img src={imagePath} loading="lazy" alt="" />
+                            </AspectRatio>
+                          </CardOverflow>
+                          <CardContent>
+                            <Typography level="body-xs">
+                              {product.productCollection}{" "}
+                              {`(Total ${product.productOrders} ordered)`}
+                            </Typography>
+                            <Link
+                              href="#product-card"
+                              fontWeight="md"
+                              color="neutral"
+                              textColor="text.primary"
+                              overlay
+                              endDecorator={<ArrowOutwardIcon />}
+                            >
+                              {product.productName}
+                            </Link>
+
+                            {product.productOnSale === 0 ? (
+                              <Typography
+                                level="title-lg"
+                                sx={{ mt: 1, fontWeight: "xl" }}
+                                endDecorator={
+                                  <Chip
+                                    component="span"
+                                    size="sm"
+                                    variant="soft"
+                                    color="success"
+                                  >
+                                    {product.productOnSale}%
+                                  </Chip>
+                                }
+                              >
+                                ${product.productPrice}
+                              </Typography>
+                            ) : (
+                              <Stack flexDirection={"row"} gap={"10px"}>
+                                <Typography
+                                  level="title-lg"
+                                  sx={{ mt: 1, fontWeight: "xl" }}
+                                  endDecorator={
+                                    <Chip
+                                      component="span"
+                                      size="sm"
+                                      variant="soft"
+                                      color="success"
+                                    >
+                                      {product.productOnSale}%
+                                    </Chip>
+                                  }
+                                >
+                                  <s className="old-price">
+                                    ${product.productPrice}
+                                  </s>
+                                </Typography>
+                                <Typography
+                                  level="title-lg"
+                                  sx={{
+                                    mt: 1,
+                                    fontWeight: "xl",
+                                    color: "#C41C1D",
+                                  }}
+                                >
+                                  ${product.productSalePrice}
+                                </Typography>
+                              </Stack>
+                            )}
+
+                            <Typography level="body-sm">
+                              (
+                              <b>
+                                {product.productLeftCount > 0 ? (
+                                  `Only ${product.productLeftCount} left in stock!`
+                                ) : (
+                                  <span style={{ color: "#C41C1D" }}>
+                                    SOLD OUT!
+                                  </span>
+                                )}
+                              </b>
+                              )
+                            </Typography>
+                          </CardContent>
+                          <CardOverflow>
+                            <Button variant="solid" color="danger" size="lg">
+                              Add to cart
+                            </Button>
+                          </CardOverflow>
+                        </Card>
+                      </CssVarsProvider>
                     </Stack>
                   );
                 })
@@ -390,7 +450,7 @@ export default function Products(props: ProductsProps) {
                   color={"secondary"}
                 />
               )}
-              onChange={paginationHandler}
+              // onChange={paginationHandler}
             />
           </Stack>
         </Stack>
