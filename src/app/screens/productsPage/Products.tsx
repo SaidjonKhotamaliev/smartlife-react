@@ -214,13 +214,13 @@ export default function Products(props: ProductsProps) {
                   <Button
                     variant="solid"
                     color={
-                      productSearch.order === "productOrder"
+                      productSearch.order === "productOrders"
                         ? "danger"
                         : "neutral"
                     }
                     size="lg"
                     className={"order"}
-                    onClick={() => searchOrderHandler("productOrder")}
+                    onClick={() => searchOrderHandler("productOrders")}
                   >
                     ORDER
                   </Button>
