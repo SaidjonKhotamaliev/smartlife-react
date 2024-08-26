@@ -360,15 +360,6 @@
   display: flex;
 }
 
-.homepage .events-frame .category-title {
-  font-family: "Dancing Script";
-  font-style: normal;
-  font-weight: 700;
-  font-size: 36px;
-  line-height: 43px;
-  padding-top: 20px;
-}
-
 .homepage .events-frame .events-main {
   position: relative;
   width: 100%;

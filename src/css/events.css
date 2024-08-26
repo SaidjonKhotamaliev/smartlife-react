@@ -1,0 +1,14 @@
+.events-info-frame {
+  max-width: 300px;
+  margin: 0 auto;
+}
+
+.events-img img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+.events-desc {
+  padding: 10px;
+}
