@@ -9,7 +9,10 @@ export interface Product {
   productLeftCount: number;
   productDesc?: string;
   productImages: string[];
+  productOnSale: number;
+  productSalePrice: number;
   productViews: number;
+  productOrders?: number;
   createdAt: Date;
   updatedAt: Date;
 }

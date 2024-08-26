@@ -56,16 +56,14 @@
 }
 
 .homepage .popular-dishes-frame .popular-section {
-  margin-top: 45px;
   display: flex;
   flex-direction: column;
-  align-items: center;
 }
 
 .homepage .popular-dishes-frame .popular-section .category-title {
-  text-align: center;
+  margin-left: 10px;
   font-family: "Roboto Serif";
-  font-size: 36px;
+  font-size: 28px;
   font-style: normal;
   font-weight: 600;
   line-height: normal;
@@ -75,7 +73,7 @@
 
 .homepage .popular-dishes-frame .popular-section .cards-frame {
   width: 100%;
-  margin-top: 43px;
+  margin-top: 15px;
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
@@ -83,10 +81,10 @@
 }
 
 .homepage .popular-dishes-frame .popular-section .cards-frame .card {
-  min-height: 430px;
-  min-width: 300px;
   margin-bottom: 35px;
   cursor: pointer;
+  min-height: 350px;
+  min-width: 300px;
 }
 .homepage
   .popular-dishes-frame
@@ -117,34 +115,39 @@
   color: #e3c08d;
 }
 
+.old-price {
+  text-decoration: line-through;
+  text-decoration-thickness: 2px; /* Adjust the thickness */
+  color: black; /* Optional: Set the color of the line */
+}
+
 /* NEW DISHES */
 
 .homepage .new-products-frame {
+  background: #f8f8ff;
   width: 100%;
   height: auto;
   display: flex;
-  color: #f8f8ff;
 }
 
 .homepage .new-products-frame .main {
-  margin-top: 45px;
   display: flex;
   flex-direction: column;
-  align-items: center;
 }
 
 .homepage .new-products-frame .main .category-title {
+  margin-left: 10px;
   font-family: "Dancing Script";
   font-style: normal;
   font-weight: 700;
-  font-size: 36px;
+  font-size: 28px;
   line-height: 43px;
   color: #000;
 }
 
 .homepage .new-products-frame .main .cards-frame {
   width: 100%;
-  margin: 48px 2px 2px 2px;
+  margin: 0px 2px 2px 2px;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -291,27 +294,26 @@
   width: 100%;
   height: auto;
   display: flex;
-  color: #f8f8ff;
+  background: #f8f8ff;
 }
 
 .homepage .active-users-frame .main {
-  margin-top: 45px;
   display: flex;
   flex-direction: column;
-  align-items: center;
 }
 
 .homepage .active-users-frame .category-title {
+  margin-left: 10px;
   font-family: "Dancing Script";
   font-style: normal;
   font-weight: 700;
-  font-size: 36px;
+  font-size: 28px;
   line-height: 43px;
   color: #000;
 }
 .homepage .active-users-frame .cards-frame {
   width: 100%;
-  margin: 48px 2px 2px 2px;
+  margin: 15px 2px 2px 2px;
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;

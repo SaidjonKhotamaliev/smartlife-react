@@ -75,9 +75,9 @@ export default function HomePage() {
 
   return (
     <div className={"homepage"}>
+      <ActiveUsers />
       <PopularDishes />
       <NewDishes />
-      <ActiveUsers />
       <Advertisement />
       <Events />
     </div>

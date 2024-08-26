@@ -1,6 +1,5 @@
 import React from "react";
 import { Box, CardContent, Container, Stack } from "@mui/material";
-import AspectRatio from "@mui/joy/AspectRatio";
 import Card from "@mui/joy/Card";
 import CardOverflow from "@mui/joy/CardOverflow";
 import VisibilityIcon from "@mui/icons-material/Visibility";
@@ -15,6 +14,8 @@ import { Product } from "../../../lib/types/product";
 import { serverApi } from "../../../lib/config";
 import { ProductCollection } from "../../../lib/enums/product.enum";
 import { useHistory } from "react-router-dom";
+import { AspectRatio, Button, Chip, Link } from "@mui/joy";
+import ArrowOutwardIcon from "@mui/icons-material/ArrowOutward";
 
 const newDishesRetriever = createSelector(retrieveNewDishes, (newDishes) => ({
   newDishes,
@@ -32,7 +33,7 @@ export default function NewDishes() {
     <div className="new-products-frame">
       <Container>
         <Stack className="main">
-          <Box className="category-title">Fresh Menu</Box>
+          <Box className="category-title">New products</Box>
           <Stack className="cards-frame">
             <CssVarsProvider>
               {newDishes.length !== 0 ? (
@@ -40,38 +41,99 @@ export default function NewDishes() {
                   const imagePath = `${serverApi}/${product.productImages[0]}`;
                   return (
                     <Card
-                      onClick={() => chooseDishHandler(product._id)}
-                      key={product._id}
-                      variant="outlined"
+                      sx={{
+                        width: 320,
+                        maxWidth: "100%",
+                        boxShadow: "lg",
+                      }}
                       className="card"
+                      onClick={() => chooseDishHandler(product._id)}
                     >
                       <CardOverflow>
-                        <div className="product-sale">---------------</div>
-                        <AspectRatio ratio={1}>
-                          <img src={imagePath} alt="" />{" "}
+                        <AspectRatio sx={{ minWidth: 200 }}>
+                          <img src={imagePath} loading="lazy" alt="" />
                         </AspectRatio>
                       </CardOverflow>
+                      <CardContent>
+                        <Typography level="body-xs">
+                          {product.productCollection}{" "}
+                          {`(Total ${product.productOrders} ordered)`}
+                        </Typography>
+                        <Link
+                          href="#product-card"
+                          fontWeight="md"
+                          color="neutral"
+                          textColor="text.primary"
+                          overlay
+                          endDecorator={<ArrowOutwardIcon />}
+                        >
+                          {product.productName}
+                        </Link>
 
-                      <CardOverflow variant="soft" className="product-detail">
-                        <Stack className="info">
-                          <Stack flexDirection={"row"}>
-                            <Typography className="title">
-                              {product.productName}
+                        {product.productOnSale === 0 ? (
+                          <Typography
+                            level="title-lg"
+                            sx={{ mt: 1, fontWeight: "xl" }}
+                            endDecorator={
+                              <Chip
+                                component="span"
+                                size="sm"
+                                variant="soft"
+                                color="success"
+                              >
+                                {product.productOnSale}%
+                              </Chip>
+                            }
+                          >
+                            ${product.productPrice}
+                          </Typography>
+                        ) : (
+                          <Stack flexDirection={"row"} gap={"10px"}>
+                            <Typography
+                              level="title-lg"
+                              sx={{ mt: 1, fontWeight: "xl" }}
+                              endDecorator={
+                                <Chip
+                                  component="span"
+                                  size="sm"
+                                  variant="soft"
+                                  color="success"
+                                >
+                                  {product.productOnSale}%
+                                </Chip>
+                              }
+                            >
+                              <s className="old-price">
+                                ${product.productPrice}
+                              </s>
                             </Typography>
-                            <Divider height="24" width="2" bg="#d9d9d9" />
-                            <Typography className="price">
-                              ${product.productPrice}
+                            <Typography
+                              level="title-lg"
+                              sx={{ mt: 1, fontWeight: "xl", color: "#C41C1D" }}
+                            >
+                              ${product.productSalePrice}
                             </Typography>
                           </Stack>
-                          <Stack>
-                            <Typography className="views">
-                              {product.productViews}
-                              <VisibilityIcon
-                                sx={{ fontSize: 20, marginLeft: "5px" }}
-                              ></VisibilityIcon>
-                            </Typography>
-                          </Stack>
-                        </Stack>
+                        )}
+
+                        <Typography level="body-sm">
+                          (
+                          <b>
+                            {product.productLeftCount > 0 ? (
+                              `Only ${product.productLeftCount} left in stock!`
+                            ) : (
+                              <span style={{ color: "#C41C1D" }}>
+                                SOLD OUT!
+                              </span>
+                            )}
+                          </b>
+                          )
+                        </Typography>
+                      </CardContent>
+                      <CardOverflow>
+                        <Button variant="solid" color="danger" size="lg">
+                          Add to cart
+                        </Button>
                       </CardOverflow>
                     </Card>
                   );
