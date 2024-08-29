@@ -1,23 +1,12 @@
 import React, { ChangeEvent, useEffect, useState } from "react";
 import {
   Box,
-  // Button,
   Container,
   Stack,
-  // Typography,
-  TextField,
-  Badge,
   PaginationItem,
   Pagination,
 } from "@mui/material";
-import { styled } from "@mui/system";
-import {
-  AddBox,
-  ArrowBack,
-  ArrowForward,
-  MonetizationOn,
-  RemoveRedEye,
-} from "@mui/icons-material";
+import { ArrowBack, ArrowForward } from "@mui/icons-material";
 import { retrieveProducts } from "./selector";
 import { createSelector } from "@reduxjs/toolkit";
 import { useDispatch, useSelector } from "react-redux";
@@ -27,9 +16,8 @@ import { Dispatch } from "@reduxjs/toolkit";
 import { Product, ProductInquiry } from "../../../lib/types/product";
 import ProductService from "../../services/ProductService";
 import { ProductCollection } from "../../../lib/enums/product.enum";
-import { useHistory, useLocation } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { CartItem } from "../../../lib/types/search";
-import Advertisement from "../homePage/Advertisement";
 import { Card, CardContent, CardOverflow, CssVarsProvider } from "@mui/joy";
 import { AspectRatio, Button, Chip, Link } from "@mui/joy";
 import ArrowOutwardIcon from "@mui/icons-material/ArrowOutward";

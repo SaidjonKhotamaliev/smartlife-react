@@ -241,7 +241,8 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  background: #d7b586;
+  background: #a41818;
+  color: #ffffff;
   border-width: 1px 0px;
   border-style: solid;
   border-color: #343434;

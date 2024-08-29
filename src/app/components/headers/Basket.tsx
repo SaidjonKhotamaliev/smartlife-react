@@ -15,6 +15,7 @@ import {
 } from "../../../lib/sweetAlert";
 import { useGlobals } from "../../hooks/useGlobals";
 import OrderService from "../../services/OrderSerivce";
+
 interface BasketProps {
   cartItems: CartItem[];
   onAdd: (item: CartItem) => void;
@@ -118,11 +119,11 @@ export default function Basket(props: BasketProps) {
             ) : (
               <Stack flexDirection={"row"}>
                 <div>Cart Products: </div>
-                <DeleteForeverIcon
+                {/* <DeleteForeverIcon
                   sx={{ ml: "5px", cursor: "pointer" }}
-                  color={"primary"}
+                  color={"success"}
                   onClick={() => onDeleteAll()}
-                />
+                /> */}
               </Stack>
             )}
           </Box>
@@ -166,9 +167,17 @@ export default function Basket(props: BasketProps) {
             <Box className={"basket-order"}>
               <span className={"price"}>Total: ${totalPrice}</span>
               <Button
+                variant={"contained"}
+                color={"secondary"}
+                onClick={() => onDeleteAll()}
+              >
+                Delete All
+              </Button>
+              <Button
                 onClick={proceedOrderHandler}
                 startIcon={<ShoppingCartIcon />}
                 variant={"contained"}
+                color={"primary"}
               >
                 Order
               </Button>
