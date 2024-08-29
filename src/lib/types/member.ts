@@ -41,3 +41,7 @@ export interface MemberUpdateInput {
   memberDesc?: string;
   memberImage?: string;
 }
+
+// export interface MemberDeleteInput {
+//   memberStatus: MemberStatus;
+// }

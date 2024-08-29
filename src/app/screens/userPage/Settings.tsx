@@ -1,4 +1,4 @@
-import { Box } from "@mui/material";
+import { Box, Stack } from "@mui/material";
 import CloudDownloadIcon from "@mui/icons-material/CloudDownload";
 import Button from "@mui/material/Button";
 import { useGlobals } from "../../hooks/useGlobals";
@@ -11,6 +11,8 @@ import {
 } from "../../../lib/sweetAlert";
 import { Messages, serverApi } from "../../../lib/config";
 import MemberService from "../../services/MemberService";
+import { MemberStatus } from "../../../lib/enums/member.enum";
+import { useHistory } from "react-router-dom";
 
 export function Settings() {
   const { authMember, setAuthMember } = useGlobals();
@@ -19,6 +21,7 @@ export function Settings() {
       ? `${serverApi}/${authMember?.memberImage}`
       : "/icons/default-user.svg"
   );
+  const history = useHistory();
 
   let [memberUpdateInput, setMemberUpdateInput] = useState<MemberUpdateInput>({
     memberNick: authMember?.memberNick,
@@ -27,6 +30,10 @@ export function Settings() {
     memberAdress: authMember?.memberAdress,
     memberImage: authMember?.memberImage,
   });
+
+  // let [memberDeleteInput, setMemberDeleteInput] = useState<MemberDeleteInput>({
+  //   memberStatus: MemberStatus
+  // });
 
   // HANDLERS
 
@@ -90,6 +97,26 @@ export function Settings() {
       setAuthMember(result);
 
       await sweetTopSmallSuccessAlert("Modified Successfully");
+    } catch (err) {
+      sweetErrorHandling(err).then();
+    }
+  };
+
+  const deleteButton = async (memberId: string | undefined) => {
+    try {
+      if (!authMember) throw new Error(Messages.error2);
+      const confirmation = window.confirm(
+        "Are you sure that you want to delete your account?"
+      );
+      if (confirmation) {
+        const member = new MemberService();
+        const result = await member.deleteMember(memberId);
+        setAuthMember(result);
+        window.location.reload();
+        await sweetTopSmallSuccessAlert(
+          "Your account has been deleted successfully"
+        );
+      }
     } catch (err) {
       sweetErrorHandling(err).then();
     }
@@ -196,11 +223,22 @@ export function Settings() {
           />
         </div>
       </Box>
-      <Box className={"save-box"}>
-        <Button variant={"contained"} onClick={submitButton}>
+      <Stack className={"save-box"} display={"flex"} flexDirection={"row"}>
+        <Button
+          variant={"contained"}
+          onClick={() => deleteButton(authMember?._id)}
+          className="delete-btn"
+        >
+          Delete
+        </Button>
+        <Button
+          variant={"contained"}
+          onClick={submitButton}
+          className="save-btn"
+        >
           Save
         </Button>
-      </Box>
+      </Stack>
     </Box>
   );
 }

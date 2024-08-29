@@ -114,5 +114,20 @@ class MemberService {
       throw err;
     }
   }
+
+  public async deleteMember(memberId: string | undefined): Promise<null> {
+    try {
+      let input = { _id: memberId };
+      let url = `${serverApi}/member/delete`;
+      const result = await axios.post(url, input, { withCredentials: true });
+      console.log("response: ", result);
+      const member: null = result.data;
+      localStorage.removeItem("memberData");
+      return member;
+    } catch (err) {
+      console.log("Error, updateMember: ", err);
+      throw err;
+    }
+  }
 }
 export default MemberService;

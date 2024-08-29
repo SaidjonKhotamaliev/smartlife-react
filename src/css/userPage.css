@@ -333,6 +333,14 @@
 
 .user-page .settings .save-box {
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   margin-top: 25px;
+}
+
+.user-page .settings .save-btn {
+  background-color: #1e883d;
+}
+
+.user-page .settings .delete-btn {
+  background-color: #e0234d;
 }
