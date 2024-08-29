@@ -112,10 +112,11 @@ export default function ChosenProduct(props: ChosenProducteProps) {
             <div className={"product-price"}>
               <span>Price:</span>
               <s style={{ marginLeft: "300px" }}>
-                $
-                {chosenProduct.productOnSale > 0
-                  ? chosenProduct.productPrice
-                  : null}
+                {`${
+                  chosenProduct.productOnSale > 0
+                    ? chosenProduct.productPrice
+                    : ""
+                }`}
               </s>
               <span>
                 $

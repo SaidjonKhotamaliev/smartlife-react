@@ -119,11 +119,6 @@ export default function Basket(props: BasketProps) {
             ) : (
               <Stack flexDirection={"row"}>
                 <div>Cart Products: </div>
-                {/* <DeleteForeverIcon
-                  sx={{ ml: "5px", cursor: "pointer" }}
-                  color={"success"}
-                  onClick={() => onDeleteAll()}
-                /> */}
               </Stack>
             )}
           </Box>

@@ -338,9 +338,11 @@
 }
 
 .user-page .settings .save-btn {
-  background-color: #1e883d;
+  color: #ffffff;
+  background-color: #70b45a;
 }
 
 .user-page .settings .delete-btn {
-  background-color: #e0234d;
+  color: #ffffff;
+  background-color: #c41c1d;
 }
