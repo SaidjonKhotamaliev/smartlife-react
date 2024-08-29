@@ -177,6 +177,17 @@ export default function Products(props: ProductsProps) {
                   <Button
                     variant="solid"
                     color={
+                      productSearch.order === "createdAt" ? "danger" : "neutral"
+                    }
+                    size="lg"
+                    className={"order"}
+                    onClick={() => searchOrderHandler("createdAt")}
+                  >
+                    NEW
+                  </Button>
+                  <Button
+                    variant="solid"
+                    color={
                       productSearch.order === "productOnSale"
                         ? "danger"
                         : "neutral"
@@ -200,17 +211,7 @@ export default function Products(props: ProductsProps) {
                   >
                     PRICE
                   </Button>
-                  <Button
-                    variant="solid"
-                    color={
-                      productSearch.order === "createdAt" ? "danger" : "neutral"
-                    }
-                    size="lg"
-                    className={"order"}
-                    onClick={() => searchOrderHandler("createdAt")}
-                  >
-                    NEW
-                  </Button>
+
                   <Button
                     variant="solid"
                     color={

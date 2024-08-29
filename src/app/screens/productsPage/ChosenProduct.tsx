@@ -3,7 +3,8 @@ import { Container, Stack, Box } from "@mui/material";
 import { Swiper, SwiperSlide } from "swiper/react";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 import Divider from "../../components/divider";
-import Button from "@mui/material/Button";
+// import Button from "@mui/material/Button";
+import { Button, CssVarsProvider } from "@mui/joy";
 import Rating from "@mui/material/Rating";
 import "swiper/css";
 import "swiper/css/free-mode";
@@ -22,6 +23,8 @@ import ProductService from "../../services/ProductService";
 import MemberService from "../../services/MemberService";
 import { serverApi } from "../../../lib/config";
 import { CartItem } from "../../../lib/types/search";
+import { Chip } from "@mui/joy";
+import Typography from "@mui/joy/Typography";
 
 const actionDispatch = (dispatch: Dispatch) => ({
   setChosenProduct: (data: Product) => dispatch(setChosenProduct(data)),
@@ -99,8 +102,7 @@ export default function ChosenProduct(props: ChosenProducteProps) {
               <Rating name="half-rating" defaultValue={2.5} precision={0.5} />
               <div className={"evaluation-box"}>
                 <div className={"product-view"}>
-                  <RemoveRedEyeIcon sx={{ mr: "10px" }} />
-                  <span>{chosenProduct.productViews}</span>
+                  <span>Total {chosenProduct.productOrders} ordered</span>
                 </div>
               </div>
             </Box>
@@ -112,24 +114,43 @@ export default function ChosenProduct(props: ChosenProducteProps) {
             <Divider height="1" width="100%" bg="#000000" />
             <div className={"product-price"}>
               <span>Price:</span>
-              <span>{`$${chosenProduct?.productPrice}`}</span>
+              <s style={{ marginLeft: "300px" }}>
+                $
+                {chosenProduct.productOnSale > 0
+                  ? chosenProduct.productPrice
+                  : null}
+              </s>
+              <span>
+                $
+                {chosenProduct.productOnSale > 0
+                  ? chosenProduct.productSalePrice
+                  : chosenProduct.productPrice}
+              </span>
             </div>
+
             <div className={"button-box"}>
-              <Button
-                variant="contained"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  onAdd({
-                    _id: chosenProduct._id,
-                    quantity: 1,
-                    price: chosenProduct.productPrice,
-                    name: chosenProduct.productName,
-                    image: chosenProduct.productImages[0],
-                  });
-                }}
-              >
-                Add To Basket
-              </Button>
+              <CssVarsProvider>
+                <Button
+                  variant="solid"
+                  size="lg"
+                  color="danger"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    onAdd({
+                      _id: chosenProduct._id,
+                      quantity: 1,
+                      price:
+                        chosenProduct.productOnSale > 0
+                          ? chosenProduct.productSalePrice
+                          : chosenProduct.productPrice,
+                      name: chosenProduct.productName,
+                      image: chosenProduct.productImages[0],
+                    });
+                  }}
+                >
+                  Add To Basket
+                </Button>
+              </CssVarsProvider>
             </div>
           </Box>
         </Stack>
