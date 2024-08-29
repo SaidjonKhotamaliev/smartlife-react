@@ -19,14 +19,20 @@ import { serverApi } from "../../../lib/config";
 import { Product } from "../../../lib/types/product";
 import ArrowOutwardIcon from "@mui/icons-material/ArrowOutward";
 import { useHistory } from "react-router-dom";
+import { CartItem } from "../../../lib/types/search";
 
 const topUsersRetriever = createSelector(retrieveTopUsers, (activeUsers) => ({
   activeUsers,
 }));
 
-export default function ActiveUsers() {
+interface HomePageProps {
+  onAdd: (item: CartItem) => void;
+}
+
+export default function ActiveUsers(props: HomePageProps) {
   const { activeUsers } = useSelector(topUsersRetriever);
   const history = useHistory();
+  const { onAdd } = props;
   const chooseDishHandler = (id: string) => {
     history.push(`/products/${id}`);
   };
@@ -133,7 +139,24 @@ export default function ActiveUsers() {
                         </Typography>
                       </CardContent>
                       <CardOverflow>
-                        <Button variant="solid" color="danger" size="lg">
+                        <Button
+                          variant="solid"
+                          color="danger"
+                          size="lg"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            onAdd({
+                              _id: product._id,
+                              quantity: 1,
+                              price:
+                                product.productOnSale > 0
+                                  ? product.productSalePrice
+                                  : product.productPrice,
+                              name: product.productName,
+                              image: product.productImages[0],
+                            });
+                          }}
+                        >
                           Add to cart
                         </Button>
                       </CardOverflow>

@@ -13,6 +13,7 @@ import { ProductCollection } from "../../../lib/enums/product.enum";
 import MemberService from "../../services/MemberService";
 import "../../../css/home.css";
 import { Member } from "../../../lib/types/member";
+import { CartItem } from "../../../lib/types/search";
 
 // REDUX SLICE
 const actionDispatch = (dispatch: Dispatch) => ({
@@ -21,7 +22,11 @@ const actionDispatch = (dispatch: Dispatch) => ({
   setHotProducts: (data: Product[]) => dispatch(setHotProducts(data)),
 });
 
-export default function HomePage() {
+interface HomePageProps {
+  onAdd: (item: CartItem) => void;
+}
+export default function HomePage(props: HomePageProps) {
+  const { onAdd } = props;
   const { setPopularDishes, setNewDishes, setHotProducts } = actionDispatch(
     useDispatch()
   );
@@ -75,9 +80,9 @@ export default function HomePage() {
 
   return (
     <div className={"homepage"}>
-      <ActiveUsers />
-      <PopularDishes />
-      <NewDishes />
+      <ActiveUsers onAdd={onAdd} />
+      <PopularDishes onAdd={onAdd} />
+      <NewDishes onAdd={onAdd} />
       <Advertisement />
       <Events />
     </div>

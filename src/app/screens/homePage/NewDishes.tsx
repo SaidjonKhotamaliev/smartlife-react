@@ -16,14 +16,20 @@ import { ProductCollection } from "../../../lib/enums/product.enum";
 import { useHistory } from "react-router-dom";
 import { AspectRatio, Button, Chip, Link } from "@mui/joy";
 import ArrowOutwardIcon from "@mui/icons-material/ArrowOutward";
+import { CartItem } from "../../../lib/types/search";
 
 const newDishesRetriever = createSelector(retrieveNewDishes, (newDishes) => ({
   newDishes,
 }));
 
-export default function NewDishes() {
+interface HomePageProps {
+  onAdd: (item: CartItem) => void;
+}
+
+export default function NewDishes(props: HomePageProps) {
   const { newDishes } = useSelector(newDishesRetriever);
   const history = useHistory();
+  const { onAdd } = props;
 
   const chooseDishHandler = (id: string) => {
     history.push(`/products/${id}`);
@@ -131,7 +137,24 @@ export default function NewDishes() {
                         </Typography>
                       </CardContent>
                       <CardOverflow>
-                        <Button variant="solid" color="danger" size="lg">
+                        <Button
+                          variant="solid"
+                          color="danger"
+                          size="lg"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            onAdd({
+                              _id: product._id,
+                              quantity: 1,
+                              price:
+                                product.productOnSale > 0
+                                  ? product.productSalePrice
+                                  : product.productPrice,
+                              name: product.productName,
+                              image: product.productImages[0],
+                            });
+                          }}
+                        >
                           Add to cart
                         </Button>
                       </CardOverflow>
