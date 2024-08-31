@@ -1,4 +1,3 @@
-import React from "react";
 import { Box, Container, Stack } from "@mui/material";
 import Card from "@mui/joy/Card";
 import CardOverflow from "@mui/joy/CardOverflow";
@@ -14,23 +13,26 @@ import {
 } from "@mui/joy";
 import { useSelector } from "react-redux";
 import { createSelector } from "reselect";
-import { retrieveTopUsers } from "./selector";
+import { retrieveHotProducts } from "./selector";
 import { serverApi } from "../../../lib/config";
 import { Product } from "../../../lib/types/product";
 import ArrowOutwardIcon from "@mui/icons-material/ArrowOutward";
 import { useHistory } from "react-router-dom";
 import { CartItem } from "../../../lib/types/search";
 
-const topUsersRetriever = createSelector(retrieveTopUsers, (activeUsers) => ({
-  activeUsers,
-}));
+const topUsersRetriever = createSelector(
+  retrieveHotProducts,
+  (HotProducts) => ({
+    HotProducts,
+  })
+);
 
 interface HomePageProps {
   onAdd: (item: CartItem) => void;
 }
 
-export default function ActiveUsers(props: HomePageProps) {
-  const { activeUsers } = useSelector(topUsersRetriever);
+export default function HotProducts(props: HomePageProps) {
+  const { HotProducts } = useSelector(topUsersRetriever);
   const history = useHistory();
   const { onAdd } = props;
   const chooseDishHandler = (id: string) => {
@@ -43,8 +45,8 @@ export default function ActiveUsers(props: HomePageProps) {
           <Box className="category-title">Hot Deal</Box>
           <Stack className="cards-frame">
             <CssVarsProvider>
-              {activeUsers.length !== 0 ? (
-                activeUsers.map((product: Product) => {
+              {HotProducts.length !== 0 ? (
+                HotProducts.map((product: Product) => {
                   const imagePath = `${serverApi}/${product.productImages}`;
 
                   return (

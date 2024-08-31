@@ -1,24 +1,21 @@
 import React, { useEffect } from "react";
-import ActiveUsers from "./ActiveUsers";
+import HotProducts from "./HotProducts";
 import Advertisement from "./Advertisement";
 import Events from "./Events";
 import NewDishes from "./NewDishes";
 import PopularDishes from "./PopularDishes";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { Dispatch } from "@reduxjs/toolkit";
-import { setNewDishes, setPopularDishes, setHotProducts } from "./slice";
+import { setNewProducts, setPopularProducts, setHotProducts } from "./slice";
 import { Product } from "../../../lib/types/product";
 import ProductService from "../../services/ProductService";
-import { ProductCollection } from "../../../lib/enums/product.enum";
-import MemberService from "../../services/MemberService";
 import "../../../css/home.css";
-import { Member } from "../../../lib/types/member";
 import { CartItem } from "../../../lib/types/search";
 
 // REDUX SLICE
 const actionDispatch = (dispatch: Dispatch) => ({
-  setPopularDishes: (data: Product[]) => dispatch(setPopularDishes(data)),
-  setNewDishes: (data: Product[]) => dispatch(setNewDishes(data)),
+  setPopularProducts: (data: Product[]) => dispatch(setPopularProducts(data)),
+  setNewProducts: (data: Product[]) => dispatch(setNewProducts(data)),
   setHotProducts: (data: Product[]) => dispatch(setHotProducts(data)),
 });
 
@@ -27,14 +24,13 @@ interface HomePageProps {
 }
 export default function HomePage(props: HomePageProps) {
   const { onAdd } = props;
-  const { setPopularDishes, setNewDishes, setHotProducts } = actionDispatch(
+  const { setPopularProducts, setNewProducts, setHotProducts } = actionDispatch(
     useDispatch()
   );
 
   useEffect(() => {
     // Data fetch
     const product = new ProductService();
-    const member = new MemberService();
     product
       .getProducts({
         page: 1,
@@ -43,7 +39,7 @@ export default function HomePage(props: HomePageProps) {
       })
       .then((data) => {
         console.log("data: ", data);
-        setPopularDishes(data);
+        setPopularProducts(data);
       })
       .catch((err) => {
         console.log(err);
@@ -57,7 +53,7 @@ export default function HomePage(props: HomePageProps) {
       })
       .then((data) => {
         console.log("data: ", data);
-        setNewDishes(data);
+        setNewProducts(data);
       })
       .catch((err) => {
         console.log(err);
@@ -80,7 +76,7 @@ export default function HomePage(props: HomePageProps) {
 
   return (
     <div className={"homepage"}>
-      <ActiveUsers onAdd={onAdd} />
+      <HotProducts onAdd={onAdd} />
       <PopularDishes onAdd={onAdd} />
       <NewDishes onAdd={onAdd} />
       <Advertisement />

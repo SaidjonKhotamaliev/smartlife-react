@@ -1,33 +1,32 @@
-import React from "react";
 import { Box, CardContent, Container, Stack } from "@mui/material";
 import Card from "@mui/joy/Card";
 import CardOverflow from "@mui/joy/CardOverflow";
-import VisibilityIcon from "@mui/icons-material/Visibility";
 import { CssVarsProvider } from "@mui/joy/styles";
-import Divider from "../../components/divider";
 import Typography from "@mui/joy/Typography";
 
 import { useSelector } from "react-redux";
 import { createSelector } from "reselect";
-import { retrieveNewDishes } from "./selector";
+import { retrieveNewProducts } from "./selector";
 import { Product } from "../../../lib/types/product";
 import { serverApi } from "../../../lib/config";
-import { ProductCollection } from "../../../lib/enums/product.enum";
 import { useHistory } from "react-router-dom";
 import { AspectRatio, Button, Chip, Link } from "@mui/joy";
 import ArrowOutwardIcon from "@mui/icons-material/ArrowOutward";
 import { CartItem } from "../../../lib/types/search";
 
-const newDishesRetriever = createSelector(retrieveNewDishes, (newDishes) => ({
-  newDishes,
-}));
+const newDishesRetriever = createSelector(
+  retrieveNewProducts,
+  (newProducts) => ({
+    newProducts,
+  })
+);
 
 interface HomePageProps {
   onAdd: (item: CartItem) => void;
 }
 
 export default function NewDishes(props: HomePageProps) {
-  const { newDishes } = useSelector(newDishesRetriever);
+  const { newProducts } = useSelector(newDishesRetriever);
   const history = useHistory();
   const { onAdd } = props;
 
@@ -42,8 +41,8 @@ export default function NewDishes(props: HomePageProps) {
           <Box className="category-title">New products</Box>
           <Stack className="cards-frame">
             <CssVarsProvider>
-              {newDishes.length !== 0 ? (
-                newDishes.map((product: Product) => {
+              {newProducts.length !== 0 ? (
+                newProducts.map((product: Product) => {
                   const imagePath = `${serverApi}/${product.productImages[0]}`;
                   return (
                     <Card

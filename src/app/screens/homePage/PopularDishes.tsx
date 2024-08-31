@@ -2,16 +2,13 @@ import React from "react";
 import { Box, Container, Stack } from "@mui/material";
 import { CssVarsProvider } from "@mui/joy/styles";
 import Card from "@mui/joy/Card";
-import CardCover from "@mui/joy/CardCover";
 import CardContent from "@mui/joy/CardContent";
 import CardOverflow from "@mui/joy/CardOverflow";
 import Typography from "@mui/joy/Typography";
-import VisibilityIcon from "@mui/icons-material/Visibility";
-import DescriptionOutlinedIcon from "@mui/icons-material/DescriptionOutlined";
 
 import { useSelector } from "react-redux";
 import { createSelector } from "reselect";
-import { retrievePopularDishes } from "./selector";
+import { retrievePopularProducts } from "./selector";
 import { Product } from "../../../lib/types/product";
 import { serverApi } from "../../../lib/config";
 import { useHistory } from "react-router-dom";
@@ -20,8 +17,8 @@ import ArrowOutwardIcon from "@mui/icons-material/ArrowOutward";
 import { CartItem } from "../../../lib/types/search";
 
 const propularDishesRetriever = createSelector(
-  retrievePopularDishes,
-  (popularDishes) => ({ popularDishes })
+  retrievePopularProducts,
+  (popularProducts) => ({ popularProducts })
 );
 
 interface HomePageProps {
@@ -29,7 +26,7 @@ interface HomePageProps {
 }
 
 export default function PopularDishes(props: HomePageProps) {
-  const { popularDishes } = useSelector(propularDishesRetriever);
+  const { popularProducts } = useSelector(propularDishesRetriever);
   const { onAdd } = props;
   const history = useHistory();
 
@@ -43,8 +40,8 @@ export default function PopularDishes(props: HomePageProps) {
         <Stack className="popular-section">
           <Box className="category-title">Most favourite products</Box>
           <Stack className="cards-frame">
-            {popularDishes.length !== 0 ? (
-              popularDishes.map((product: Product) => {
+            {popularProducts.length !== 0 ? (
+              popularProducts.map((product: Product) => {
                 const imagePath = `${serverApi}/${product.productImages[0]}`;
                 return (
                   <CssVarsProvider key={product._id}>
