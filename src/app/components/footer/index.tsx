@@ -20,7 +20,7 @@ export default function Footer() {
         <Stack flexDirection={"row"} sx={{ mt: "94px" }}>
           <Stack flexDirection={"column"} style={{ width: "340px" }}>
             <Box>
-              <img width={"150px"} src={"/icons/file.png"} />
+              <h1 className="logo-word">SMARTLIFE</h1>
             </Box>
             <Box className={"foot-desc-txt"}>
               At Smartlife, we bring you the latest and most innovative gadgets.
@@ -78,7 +78,7 @@ export default function Footer() {
         </Stack>
         <Stack
           style={{ border: "1px solid #C5C8C9", width: "100%", opacity: "0.2" }}
-          sx={{ mt: "80px" }}
+          sx={{ mt: "130px" }}
         ></Stack>
         <Stack className={"copyright-txt"}>
           © Copyright Mit 13 Global, All rights reserved.

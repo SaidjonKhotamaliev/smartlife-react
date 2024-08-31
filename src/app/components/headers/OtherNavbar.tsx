@@ -50,7 +50,7 @@ export default function OtherNavbar(props: OtherNavbarProps) {
         <Stack className="menu">
           <Box>
             <NavLink to={"/"}>
-              <img className="brand-logo" src="/icons/file.png" />
+              <h1 className="logo-word">SMARTLIFE</h1>
             </NavLink>
           </Box>
           <Stack className="links">

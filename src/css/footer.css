@@ -92,3 +92,22 @@
 .foot-category-title:hover:after {
   transform: scaleX(1);
 }
+
+.logo-word {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif; /* Modern, clean font */
+  font-size: 36px; /* Smaller font size */
+  color: #bead5a; /* Main text color */
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+  letter-spacing: 1.5px; /* Space between letters for a modern look */
+  text-transform: uppercase; /* Make the text uppercase */
+  background: linear-gradient(
+    90deg,
+    #444c54,
+    #bead5a,
+    #bebfbf
+  ); /* Gradient with specified colors */
+  background-clip: text; /* Standard property for broader compatibility */
+  -webkit-background-clip: text; /* Vendor prefix for WebKit browsers */
+  -webkit-text-fill-color: transparent;
+  display: inline-block; /* Ensure the text behaves like a block for styling */
+}
